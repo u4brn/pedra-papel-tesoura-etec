@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedra, Papel e Tesoura</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #302b63);
+            color: white;
+        }
+
+        .jogo {
+            width: min(90%, 500px);
+            padding: 35px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 22px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 34px;
+        }
+
+        .placar {
+            display: flex;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .pontos {
+            flex: 1;
+            padding: 15px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.18);
+        }
+
+        .pontos p {
+            margin: 5px;
+            font-size: 18px;
+        }
+
+        .valor {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .opcoes {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .opcao {
+            border: none;
+            border-radius: 14px;
+            padding: 14px 20px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            background: #5b5bd6;
+            transition: 0.2s;
+        }
+
+        .opcao:hover {
+            transform: translateY(-3px);
+            background: #7373e8;
+        }
+
+        .resultado {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.20);
+        }
+
+        .resultado p {
+            margin: 8px;
+        }
+
+        .reiniciar {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 11px 22px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            background: #44445f;
+            transition: 0.2s;
+        }
+
+        .reiniciar:hover {
+            background: #5a5a78;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="jogo">
+        <h1>🎮 Pedra, Papel e Tesoura</h1>
+
+        <div class="placar">
+            <div class="pontos">
+                <p>Jogador</p>
+                <p class="valor">{{ jogador }}</p>
+            </div>
+
+            <div class="pontos">
+                <p>Computador</p>
+                <p class="valor">{{ computador }}</p>
+            </div>
+        </div>
+
+        <form action="/jogar" method="POST">
+            <div class="opcoes">
+                <button class="opcao" type="submit" name="escolha" value="pedra">🪨 Pedra</button>
+                <button class="opcao" type="submit" name="escolha" value="papel">📄 Papel</button>
+                <button class="opcao" type="submit" name="escolha" value="tesoura">✂️ Tesoura</button>
+            </div>
+        </form>
+
+        {% if resultado %}
+            <div class="resultado">
+                <p><strong>{{ resultado }}</strong></p>
+                <p>Você escolheu: {{ escolha }}</p>
+                <p>O computador escolheu: {{ computador_escolha }}</p>
+            </div>
+        {% endif %}
+
+        <a class="reiniciar" href="/reiniciar">🔄 Reiniciar</a>
+    </div>
+</body>
+</html>
